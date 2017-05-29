@@ -1,7 +1,13 @@
 ﻿function js2html(js) {
-	switch (js.type) {
-		case 'Literal':
-			return $("<literal>").append(js.raw);
-			break;
+	return expression(js);
+	function expression(js) {
+		switch (js.type) {
+			case 'Literal':
+				return $("<literal>").append(js.raw);
+				break;
+			case 'Identifier':
+				return $("<identifier>").append(js.name);
+				break;
+		}
 	}
 }
