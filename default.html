@@ -8,7 +8,7 @@
 </head>
 <body>
 	<script>
-		var js = acorn.parseExpressionAt("26");
+		var js = acorn.parseExpressionAt("function(){var a=26;return a;}");
 		var html = js2html(js);
 		alert(html[0].outerHTML);
 	</script>
