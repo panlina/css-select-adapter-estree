@@ -1,6 +1,7 @@
 ﻿function js2html(js) {
 	return expression(js);
 	function expression(js) {
+		if (js == undefined) return undefined;
 		switch (js.type) {
 			case 'Literal':
 				return $("<literal>").append(js.raw);
