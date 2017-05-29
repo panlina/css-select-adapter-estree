@@ -3,5 +3,8 @@
   "homepage": "https://github.com/panlina/js2html",
   "authors": [
     "Jack Lu <jacklu@jacklu.me>"
-  ]
+  ],
+  "dependencies": {
+    "jquery": "*"
+  }
 }
