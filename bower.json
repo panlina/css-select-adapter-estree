@@ -6,5 +6,8 @@
   ],
   "dependencies": {
     "jquery": "*"
+  },
+  "devDependencies": {
+    "acorn": "^5.0.3"
   }
 }

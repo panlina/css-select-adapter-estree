@@ -1,0 +1,16 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src=bower_components/jquery/dist/jquery.js></script>
+	<script src=bower_components/acorn/dist/acorn.js></script>
+	<script src=js2html.js></script>
+</head>
+<body>
+	<script>
+		var js = acorn.parseExpressionAt("26");
+		var html = js2html(js);
+		alert(html[0].outerHTML);
+	</script>
+</body>
+</html>
