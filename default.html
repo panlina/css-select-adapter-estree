@@ -13,7 +13,6 @@
 		var js = acorn.parseExpressionAt("function(){var a=26;return a;}");
 		var html = js2html(js);
 		alert(html[0].outerHTML);
-		var html = $("<literal>26</literal>");
 		var js = html2js(html);
 		alert(escodegen.generate(js));
 	</script>
