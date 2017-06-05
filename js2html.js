@@ -12,6 +12,13 @@
 			case 'FunctionExpression':
 				return $("<function>").append(statement(js.body));
 				break;
+			case 'BinaryExpression':
+			case 'AssignmentExpression':
+				return $("<binary>")
+					.append($("<left>").append(expression(js.left)))
+					.append($("<right>").append(expression(js.right)))
+					.append($("<operator>").append(js.operator));
+				break;
 		}
 	}
 	function statement(js) {

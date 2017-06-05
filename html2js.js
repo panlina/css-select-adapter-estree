@@ -22,6 +22,14 @@
 					body: statement(html.children())
 				};
 				break;
+			case 'BINARY':
+				return {
+					type: 'BinaryExpression',
+					left: expression(html.children('left').children()),
+					right: expression(html.children('right').children()),
+					operator: html.children('operator').html()
+				};
+				break;
 		}
 	}
 	function statement(html) {
