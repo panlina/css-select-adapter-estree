@@ -22,6 +22,7 @@
 		}
 	}
 	function statement(js) {
+		if (js == undefined) return undefined;
 		switch (js.type) {
 			case "ReturnStatement":
 				return $("<return>").append(expression(js.argument));
@@ -31,6 +32,13 @@
 				break;
 			case "BlockStatement":
 				return $("<block>").append(js.body.map(statement));
+				break;
+			case "IfStatement":
+				return $("<if>").append(
+					$('<test>').append(expression(js.test)),
+					$('<consequent>').append(statement(js.consequent)),
+					$('<alternate>').append(statement(js.alternate))
+				);
 				break;
 		}
 	}

@@ -33,6 +33,7 @@
 		}
 	}
 	function statement(html) {
+		if (html[0] == undefined) return undefined;
 		switch (html[0].tagName) {
 			case 'RETURN':
 				return {
@@ -51,6 +52,14 @@
 				return {
 					type: 'BlockStatement',
 					body: html.children().map(function () { return statement($(this)); })
+				};
+				break;
+			case 'IF':
+				return {
+					type: 'IfStatement',
+					test: expression(html.children('test').children()),
+					consequent: statement(html.children('consequent').children()),
+					alternate: statement(html.children('alternate').children())
 				};
 				break;
 		}
