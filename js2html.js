@@ -39,6 +39,11 @@
 					$('<consequent>').append(statement(js.consequent)),
 					$('<alternate>').append(statement(js.alternate))
 				);
+			case "WhileStatement":
+				return $("<while>").append(
+					$('<test>').append(expression(js.test)),
+					$('<body>').append(statement(js.body))
+				);
 				break;
 		}
 	}

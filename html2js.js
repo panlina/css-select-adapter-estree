@@ -61,6 +61,12 @@
 					consequent: statement(html.children('consequent').children()),
 					alternate: statement(html.children('alternate').children())
 				};
+			case 'WHILE':
+				return {
+					type: 'WhileStatement',
+					test: expression(html.children('test').children()),
+					body: statement(html.children('body').children())
+				};
 				break;
 		}
 	}
