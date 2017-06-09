@@ -22,6 +22,15 @@
 					body: statement(html.children())
 				};
 				break;
+			case 'UNARY':
+				var operator = html.children('operator').text();
+				return {
+					type: operator != '++' && operator != '--' ? 'UnaryExpression' : 'UpdateExpression',
+					argument: expression(html.children('argument').children()),
+					operator: operator,
+					prefix: html.children('prefix').text() == 'true'
+				};
+				break;
 			case 'BINARY':
 				return {
 					type: 'BinaryExpression',

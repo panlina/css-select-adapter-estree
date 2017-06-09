@@ -12,6 +12,13 @@
 			case 'FunctionExpression':
 				return $("<function>").append(statement(js.body));
 				break;
+			case 'UnaryExpression':
+			case 'UpdateExpression':
+				return $("<unary>")
+					.append($("<argument>").append(expression(js.argument)))
+					.append($("<operator>").append(js.operator))
+					.append($("<prefix>").append(js.prefix.toString()));
+				break;
 			case 'BinaryExpression':
 			case 'AssignmentExpression':
 				return $("<binary>")
