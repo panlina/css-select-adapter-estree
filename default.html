@@ -10,7 +10,7 @@
 </head>
 <body>
 	<script>
-		var js = acorn.parseExpressionAt("function(){var a=26;if(a)while(true)return a=42;}");
+		var js = acorn.parseExpressionAt("function(){var a=26;if(a)while(true)for(var a=42;a;)return a;}");
 		var html = js2html(js);
 		alert(html[0].outerHTML);
 		var js = html2js(html);

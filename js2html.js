@@ -45,6 +45,18 @@
 					$('<body>').append(statement(js.body))
 				);
 				break;
+			case "ForStatement":
+				return $("<for>").append(
+					$('<init>').append(js.init &&
+						(js.init.type == 'VariableDeclaration' ?
+							statement : expression
+						)(js.init)
+					),
+					$('<test>').append(expression(js.test)),
+					$('<update>').append(expression(js.update)),
+					$('<body>').append(statement(js.body))
+				);
+				break;
 		}
 	}
 	function decl(js) {

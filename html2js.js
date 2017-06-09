@@ -68,6 +68,16 @@
 					body: statement(html.children('body').children())
 				};
 				break;
+			case 'FOR':
+				var init = html.children('init').children();
+				return {
+					type: 'ForStatement',
+					init: init[0] && (init[0].tagName == 'VAR' ? statement : expression)(init),
+					test: expression(html.children('test').children()),
+					update: expression(html.children('update').children()),
+					body: statement(html.children('body').children())
+				};
+				break;
 		}
 	}
 	function decl(html) {
