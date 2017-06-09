@@ -44,6 +44,12 @@
 	function statement(html) {
 		if (html[0] == undefined) return undefined;
 		switch (html[0].tagName) {
+			case 'EXPRESSION':
+				return {
+					type: 'ExpressionStatement',
+					expression: expression(html.children())
+				};
+				break;
 			case 'RETURN':
 				return {
 					type: 'ReturnStatement',

@@ -31,6 +31,9 @@
 	function statement(js) {
 		if (js == undefined) return undefined;
 		switch (js.type) {
+			case "ExpressionStatement":
+				return $("<expression>").append(expression(js.expression));
+				break;
 			case "ReturnStatement":
 				return $("<return>").append(expression(js.argument));
 				break;
