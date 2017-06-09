@@ -14,17 +14,19 @@
 				break;
 			case 'UnaryExpression':
 			case 'UpdateExpression':
-				return $("<unary>")
-					.append($("<argument>").append(expression(js.argument)))
-					.append($("<operator>").append(js.operator))
-					.append($("<prefix>").append(js.prefix.toString()));
+				return $("<unary>").append(
+					$("<argument>").append(expression(js.argument)),
+					$("<operator>").append(js.operator),
+					$("<prefix>").append(js.prefix.toString())
+				);
 				break;
 			case 'BinaryExpression':
 			case 'AssignmentExpression':
-				return $("<binary>")
-					.append($("<left>").append(expression(js.left)))
-					.append($("<right>").append(expression(js.right)))
-					.append($("<operator>").append(js.operator));
+				return $("<binary>").append(
+					$("<left>").append(expression(js.left)),
+					$("<right>").append(expression(js.right)),
+					$("<operator>").append(js.operator)
+				);
 				break;
 		}
 	}
@@ -70,8 +72,9 @@
 		}
 	}
 	function decl(js) {
-		return $("<decl>")
-			.append($("<name>").text(js.id.name))
-			.append($("<value>").append(expression(js.init)));
+		return $("<decl>").append(
+			$("<name>").text(js.id.name),
+			$("<value>").append(expression(js.init))
+		);
 	}
 }
