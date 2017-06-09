@@ -27,7 +27,7 @@
 					type: 'BinaryExpression',
 					left: expression(html.children('left').children()),
 					right: expression(html.children('right').children()),
-					operator: html.children('operator').html()
+					operator: html.children('operator').text()
 				};
 				break;
 		}
