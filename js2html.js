@@ -46,16 +46,10 @@
 				return $("<block>").append(js.body.map(statement));
 				break;
 			case "IfStatement":
-				return $("<if>").append(
-					$('<test>').append(expression(js.test)),
-					$('<consequent>').append(statement(js.consequent)),
-					$('<alternate>').append(statement(js.alternate))
-				);
+				return html(syntax.if)(js);
+				break;
 			case "WhileStatement":
-				return $("<while>").append(
-					$('<test>').append(expression(js.test)),
-					$('<body>').append(statement(js.body))
-				);
+				return html(syntax.while)(js);
 				break;
 			case "ForStatement":
 				return $("<for>").append(
@@ -76,5 +70,18 @@
 			$("<name>").text(js.id.name),
 			$("<value>").append(expression(js.init))
 		);
+	}
+	function html(syntax) {
+		return function (js) {
+			return $('<' + syntax.name + '>').append(
+				Object.keys(syntax.property).map(function (name) {
+					var type = syntax.property[name];
+					return $('<' + name + '>').append({
+						expression: expression,
+						statement: statement
+					}[type](js[name]));
+				})
+			);
+		};
 	}
 }
