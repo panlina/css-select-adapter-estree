@@ -14,19 +14,11 @@
 				break;
 			case 'UnaryExpression':
 			case 'UpdateExpression':
-				return $("<unary>").append(
-					$("<argument>").append(expression(js.argument)),
-					$("<operator>").append(js.operator),
-					$("<prefix>").append(js.prefix.toString())
-				);
+				return html(syntax.unary)(js);
 				break;
 			case 'BinaryExpression':
 			case 'AssignmentExpression':
-				return $("<binary>").append(
-					$("<left>").append(expression(js.left)),
-					$("<right>").append(expression(js.right)),
-					$("<operator>").append(js.operator)
-				);
+				return html(syntax.binary)(js);
 				break;
 		}
 	}
@@ -78,7 +70,8 @@
 					var type = syntax.property[name];
 					return $('<' + name + '>').append({
 						expression: expression,
-						statement: statement
+						statement: statement,
+						text: function (x) { return x.toString();}
 					}[type](js[name]));
 				})
 			);

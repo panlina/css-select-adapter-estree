@@ -14,3 +14,19 @@ syntax.while = {
 		body: 'statement'
 	}
 };
+syntax.unary = {
+	name: 'unary',
+	property: {
+		argument: 'expression',
+		operator: 'text',
+		prefix: 'text'
+	}
+};
+syntax.binary = {
+	name: 'binary',
+	property: {
+		left: 'expression',
+		right: 'expression',
+		operator: 'text'
+	}
+};
