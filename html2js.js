@@ -23,21 +23,13 @@
 				};
 				break;
 			case 'UNARY':
-				var operator = html.children('operator').text();
-				return {
-					type: operator != '++' && operator != '--' ? 'UnaryExpression' : 'UpdateExpression',
-					argument: expression(html.children('argument').children()),
-					operator: operator,
-					prefix: html.children('prefix').text() == 'true'
-				};
+				var _js = js(syntax.unary)(html);
+				if (_js.operator == '++' || _js.operator == '--')
+					_js.type = 'UpdateExpression';
+				return _js;
 				break;
 			case 'BINARY':
-				return {
-					type: 'BinaryExpression',
-					left: expression(html.children('left').children()),
-					right: expression(html.children('right').children()),
-					operator: html.children('operator').text()
-				};
+				return js(syntax.binary)(html);
 				break;
 		}
 	}
@@ -70,18 +62,9 @@
 				};
 				break;
 			case 'IF':
-				return {
-					type: 'IfStatement',
-					test: expression(html.children('test').children()),
-					consequent: statement(html.children('consequent').children()),
-					alternate: statement(html.children('alternate').children())
-				};
+				return js(syntax.if)(html);
 			case 'WHILE':
-				return {
-					type: 'WhileStatement',
-					test: expression(html.children('test').children()),
-					body: statement(html.children('body').children())
-				};
+				return js(syntax.while)(html);
 				break;
 			case 'FOR':
 				var init = html.children('init').children();
@@ -100,6 +83,22 @@
 			type: 'VariableDeclarator',
 			id: { type: 'Identifier', name: html.children('name').html() },
 			init: expression(html.children('value').children())
+		};
+	}
+	function js(syntax) {
+		return function (html) {
+			var js = {};
+			js.type = syntax.type;
+			for (var name in syntax.property) {
+				var type = syntax.property[name];
+				js[name] = {
+					expression: expression,
+					statement: statement,
+					string: function (x) { return x.text(); },
+					bool: function (x) { return x.text() != 'false'; }
+				}[type](html.children(name).contents())
+			};
+			return js;
 		};
 	}
 }

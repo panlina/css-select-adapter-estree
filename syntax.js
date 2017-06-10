@@ -1,6 +1,7 @@
 var syntax = {};
 syntax.if = {
 	name: 'if',
+	type: 'IfStatement',
 	property: {
 		test: 'expression',
 		consequent: 'statement',
@@ -9,6 +10,7 @@ syntax.if = {
 };
 syntax.while = {
 	name: 'while',
+	type: 'WhileStatement',
 	property: {
 		test: 'expression',
 		body: 'statement'
@@ -16,6 +18,7 @@ syntax.while = {
 };
 syntax.unary = {
 	name: 'unary',
+	type: 'UnaryExpression',
 	property: {
 		argument: 'expression',
 		operator: 'string',
@@ -24,6 +27,7 @@ syntax.unary = {
 };
 syntax.binary = {
 	name: 'binary',
+	type: 'BinaryExpression',
 	property: {
 		left: 'expression',
 		right: 'expression',
