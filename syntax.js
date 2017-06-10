@@ -18,8 +18,8 @@ syntax.unary = {
 	name: 'unary',
 	property: {
 		argument: 'expression',
-		operator: 'text',
-		prefix: 'text'
+		operator: 'string',
+		prefix: 'bool'
 	}
 };
 syntax.binary = {
@@ -27,6 +27,6 @@ syntax.binary = {
 	property: {
 		left: 'expression',
 		right: 'expression',
-		operator: 'text'
+		operator: 'string'
 	}
 };

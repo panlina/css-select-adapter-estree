@@ -71,7 +71,8 @@
 					return $('<' + name + '>').append({
 						expression: expression,
 						statement: statement,
-						text: function (x) { return x.toString();}
+						string: function (x) { return x.toString();},
+						bool: function (x) { return x.toString();}
 					}[type](js[name]));
 				})
 			);
