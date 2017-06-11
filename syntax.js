@@ -1,4 +1,8 @@
 var syntax = {};
+syntax.var = {
+	name: 'var',
+	type: 'VariableDeclaration'
+};
 syntax.if = {
 	name: 'if',
 	type: 'IfStatement',
@@ -13,6 +17,16 @@ syntax.while = {
 	type: 'WhileStatement',
 	property: {
 		test: 'expression',
+		body: 'statement'
+	}
+};
+syntax.for = {
+	name: 'for',
+	type: 'ForStatement',
+	property: {
+		init: null,
+		test: 'expression',
+		update: 'expression',
 		body: 'statement'
 	}
 };
@@ -32,5 +46,16 @@ syntax.binary = {
 		left: 'expression',
 		right: 'expression',
 		operator: 'string'
+	}
+};
+var Syntax = {};
+Syntax.type = function (jshtml) {
+	var type = jshtml instanceof jQuery ?
+		syntax[jshtml[0].tagName.toLowerCase()].type :
+		jshtml.type;
+	return endsWith(type, "Declaration") || endsWith(type, "Statement") ?
+		'statement' : 'expression';
+	function endsWith(s, t) {
+		return s.lastIndexOf(t) + t.length == s.length;
 	}
 };

@@ -67,14 +67,7 @@
 				return js(syntax.while)(html);
 				break;
 			case 'FOR':
-				var init = html.children('init').children();
-				return {
-					type: 'ForStatement',
-					init: init[0] && (init[0].tagName == 'VAR' ? statement : expression)(init),
-					test: expression(html.children('test').children()),
-					update: expression(html.children('update').children()),
-					body: statement(html.children('body').children())
-				};
+				return js(syntax.for)(html);
 				break;
 		}
 	}
@@ -90,7 +83,7 @@
 			var js = {};
 			js.type = syntax.type;
 			for (var name in syntax.property) {
-				var type = syntax.property[name];
+				var type = syntax.property[name] || Syntax.type(html.children(name).children());
 				js[name] = {
 					expression: expression,
 					statement: statement,

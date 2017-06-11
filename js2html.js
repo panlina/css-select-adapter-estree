@@ -44,16 +44,7 @@
 				return html(syntax.while)(js);
 				break;
 			case "ForStatement":
-				return $("<for>").append(
-					$('<init>').append(js.init &&
-						(js.init.type == 'VariableDeclaration' ?
-							statement : expression
-						)(js.init)
-					),
-					$('<test>').append(expression(js.test)),
-					$('<update>').append(expression(js.update)),
-					$('<body>').append(statement(js.body))
-				);
+				return html(syntax.for)(js);
 				break;
 		}
 	}
@@ -67,7 +58,7 @@
 		return function (js) {
 			return $('<' + syntax.name + '>').append(
 				Object.keys(syntax.property).map(function (name) {
-					var type = syntax.property[name];
+					var type = syntax.property[name] || Syntax.type(js[name]);
 					return $('<' + name + '>').append({
 						expression: expression,
 						statement: statement,
