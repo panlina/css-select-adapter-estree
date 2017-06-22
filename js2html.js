@@ -10,7 +10,14 @@
 				return $("<identifier>").append(js.name);
 				break;
 			case 'FunctionExpression':
-				return $("<function>").append(statement(js.body));
+				return $("<function>").append(
+					$("<params>").append(
+						js.params.map(expression)
+					),
+					$("<body>").append(
+						statement(js.body)
+					)
+				);
 				break;
 			case 'UnaryExpression':
 			case 'UpdateExpression':

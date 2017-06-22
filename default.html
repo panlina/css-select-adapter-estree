@@ -11,7 +11,7 @@
 </head>
 <body>
 	<script>
-		var js = acorn.parseExpressionAt("function(){var a=26;a++;if(a)while(true)for(var a=42;!a;)return a;}");
+		var js = acorn.parseExpressionAt("function(x){var a=x;a++;if(a)while(true)for(var a=42;!a;)return a;}");
 		var html = js2html(js);
 		alert(html[0].outerHTML);
 		var js = html2js(html);

@@ -18,8 +18,8 @@
 			case 'FUNCTION':
 				return {
 					type: 'FunctionExpression',
-					params: [],
-					body: statement(html.children())
+					params: html.children('params').children().map(function () { return expression($(this)); }),
+					body: statement(html.children('body').children())
 				};
 				break;
 			case 'UNARY':
