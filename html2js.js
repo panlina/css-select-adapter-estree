@@ -15,6 +15,13 @@
 					name: html.html()
 				};
 				break;
+			case 'CALL':
+				return {
+					type: 'CallExpression',
+					callee: expression(html.children('callee').children()),
+					arguments: html.children('arguments').children().map(function () { return expression($(this)); })
+				};
+				break;
 			case 'FUNCTION':
 				return {
 					type: 'FunctionExpression',

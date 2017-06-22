@@ -9,6 +9,16 @@
 			case 'Identifier':
 				return $("<identifier>").append(js.name);
 				break;
+			case 'CallExpression':
+				return $("<call>").append(
+					$("<callee>").append(
+						expression(js.callee)
+					),
+					$("<arguments>").append(
+						js.arguments.map(expression)
+					)
+				);
+				break;
 			case 'FunctionExpression':
 				return $("<function>").append(
 					$("<params>").append(
