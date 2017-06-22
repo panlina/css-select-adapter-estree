@@ -10,8 +10,19 @@
 	<script src=html2js.js></script>
 </head>
 <body>
+	<script type=text/plain id=js>
+		function(x){
+			var a=x;
+			a++;
+			window.alert(a);
+			if(a)
+				while(true)
+					for(var a=42;!a;)
+						return a;
+		}(0)
+	</script>
 	<script>
-		var js = acorn.parseExpressionAt("function(x){var a=x;a++;window.alert(a);if(a)while(true)for(var a=42;!a;)return a;}(0)");
+		var js = acorn.parseExpressionAt($("#js").text());
 		var html = js2html(js);
 		alert(html[0].outerHTML);
 		var js = html2js(html);
