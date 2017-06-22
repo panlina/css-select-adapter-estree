@@ -22,6 +22,9 @@
 					arguments: html.children('arguments').children().map(function () { return expression($(this)); })
 				};
 				break;
+			case 'MEMBER':
+				return js(syntax.member)(html);
+				break;
 			case 'FUNCTION':
 				return {
 					type: 'FunctionExpression',

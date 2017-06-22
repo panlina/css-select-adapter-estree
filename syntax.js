@@ -48,6 +48,15 @@ syntax.binary = {
 		operator: 'string'
 	}
 };
+syntax.member = {
+	name: 'member',
+	type: 'MemberExpression',
+	property: {
+		object: 'expression',
+		property: 'expression',
+		computed: 'bool'
+	}
+};
 var Syntax = {};
 Syntax.type = function (jshtml) {
 	var type = jshtml instanceof jQuery ?

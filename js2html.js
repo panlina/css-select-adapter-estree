@@ -19,6 +19,9 @@
 					)
 				);
 				break;
+			case 'MemberExpression':
+				return html(syntax.member)(js);
+				break;
 			case 'FunctionExpression':
 				return $("<function>").append(
 					$("<params>").append(
