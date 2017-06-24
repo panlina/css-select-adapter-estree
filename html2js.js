@@ -73,6 +73,7 @@
 				break;
 			case 'IF':
 				return translate(syntax.if)(html);
+				break;
 			case 'WHILE':
 				return translate(syntax.while)(html);
 				break;
