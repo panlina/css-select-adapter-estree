@@ -20,7 +20,7 @@
 				);
 				break;
 			case 'MemberExpression':
-				return html(syntax.member)(js);
+				return translate(syntax.member)(js);
 				break;
 			case 'FunctionExpression':
 				return $("<function>").append(
@@ -34,11 +34,11 @@
 				break;
 			case 'UnaryExpression':
 			case 'UpdateExpression':
-				return html(syntax.unary)(js);
+				return translate(syntax.unary)(js);
 				break;
 			case 'BinaryExpression':
 			case 'AssignmentExpression':
-				return html(syntax.binary)(js);
+				return translate(syntax.binary)(js);
 				break;
 		}
 	}
@@ -58,13 +58,13 @@
 				return $("<block>").append(js.body.map(statement));
 				break;
 			case "IfStatement":
-				return html(syntax.if)(js);
+				return translate(syntax.if)(js);
 				break;
 			case "WhileStatement":
-				return html(syntax.while)(js);
+				return translate(syntax.while)(js);
 				break;
 			case "ForStatement":
-				return html(syntax.for)(js);
+				return translate(syntax.for)(js);
 				break;
 		}
 	}
@@ -74,7 +74,7 @@
 			$("<value>").append(expression(js.init))
 		);
 	}
-	function html(syntax) {
+	function translate(syntax) {
 		return function (js) {
 			return $('<' + syntax.name + '>').append(
 				Object.keys(syntax.property).map(function (name) {

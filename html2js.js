@@ -23,7 +23,7 @@
 				};
 				break;
 			case 'MEMBER':
-				return js(syntax.member)(html);
+				return translate(syntax.member)(html);
 				break;
 			case 'FUNCTION':
 				return {
@@ -33,13 +33,13 @@
 				};
 				break;
 			case 'UNARY':
-				var _js = js(syntax.unary)(html);
-				if (_js.operator == '++' || _js.operator == '--')
-					_js.type = 'UpdateExpression';
-				return _js;
+				var js = translate(syntax.unary)(html);
+				if (js.operator == '++' || js.operator == '--')
+					js.type = 'UpdateExpression';
+				return js;
 				break;
 			case 'BINARY':
-				return js(syntax.binary)(html);
+				return translate(syntax.binary)(html);
 				break;
 		}
 	}
@@ -72,12 +72,12 @@
 				};
 				break;
 			case 'IF':
-				return js(syntax.if)(html);
+				return translate(syntax.if)(html);
 			case 'WHILE':
-				return js(syntax.while)(html);
+				return translate(syntax.while)(html);
 				break;
 			case 'FOR':
-				return js(syntax.for)(html);
+				return translate(syntax.for)(html);
 				break;
 		}
 	}
@@ -88,7 +88,7 @@
 			init: expression(html.children('value').children())
 		};
 	}
-	function js(syntax) {
+	function translate(syntax) {
 		return function (html) {
 			var js = {};
 			js.type = syntax.type;
