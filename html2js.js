@@ -45,42 +45,51 @@
 	}
 	function statement(html) {
 		if (html[0] == undefined) return undefined;
+		var js;
 		switch (html[0].tagName) {
 			case 'EXPRESSION':
-				return {
+				js = {
 					type: 'ExpressionStatement',
 					expression: expression(html.children())
 				};
 				break;
 			case 'RETURN':
-				return {
+				js = {
 					type: 'ReturnStatement',
 					argument: expression(html.children())
 				};
 				break;
 			case 'VAR':
-				return {
+				js = {
 					type: 'VariableDeclaration',
 					kind: 'var',
 					declarations: html.children().map(function () { return decl($(this)); })
 				};
 				break;
 			case 'BLOCK':
-				return {
+				js = {
 					type: 'BlockStatement',
 					body: html.children().map(function () { return statement($(this)); })
 				};
 				break;
 			case 'IF':
-				return translate(syntax.if)(html);
+				js = translate(syntax.if)(html);
 				break;
 			case 'WHILE':
-				return translate(syntax.while)(html);
+				js = translate(syntax.while)(html);
 				break;
 			case 'FOR':
-				return translate(syntax.for)(html);
+				js = translate(syntax.for)(html);
 				break;
 		}
+		var label = html.attr('label');
+		if (label)
+			js = {
+				type: 'LabeledStatement',
+				label: { type: 'Identifier', name: label },
+				body: js
+			};
+		return js;
 	}
 	function decl(html) {
 		return {

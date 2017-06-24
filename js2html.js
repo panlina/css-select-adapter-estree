@@ -48,6 +48,9 @@
 			case "ExpressionStatement":
 				return $("<expression>").append(expression(js.expression));
 				break;
+			case "LabeledStatement":
+				return statement(js.body).attr('label', js.label.name);
+				break;
 			case "ReturnStatement":
 				return $("<return>").append(expression(js.argument));
 				break;
