@@ -59,7 +59,7 @@ syntax.member = {
 };
 var Syntax = {};
 Syntax.type = function (jshtml) {
-	var type = jshtml instanceof jQuery ?
+	var type = jshtml instanceof $ ?
 		syntax[jshtml[0].tagName.toLowerCase()].type :
 		jshtml.type;
 	return endsWith(type, "Declaration") || endsWith(type, "Statement") ?
