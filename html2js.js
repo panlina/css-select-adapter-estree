@@ -3,42 +3,42 @@
 	function expression(html) {
 		if (html[0] == undefined) return undefined;
 		switch (html[0].tagName) {
-			case 'LITERAL':
+			case 'literal':
 				return {
 					type: 'Literal',
 					value: eval(html.html())
 				}
 				break;
-			case 'IDENTIFIER':
+			case 'identifier':
 				return {
 					type: 'Identifier',
 					name: html.html()
 				};
 				break;
-			case 'CALL':
+			case 'call':
 				return {
 					type: 'CallExpression',
 					callee: expression(html.children('callee').children()),
 					arguments: html.children('arguments').children().map(function () { return expression($(this)); })
 				};
 				break;
-			case 'MEMBER':
+			case 'member':
 				return translate(syntax.member)(html);
 				break;
-			case 'FUNCTION':
+			case 'function':
 				return {
 					type: 'FunctionExpression',
 					params: html.children('params').children().map(function () { return expression($(this)); }),
 					body: statement(html.children('body').children())
 				};
 				break;
-			case 'UNARY':
+			case 'unary':
 				var js = translate(syntax.unary)(html);
 				if (js.operator == '++' || js.operator == '--')
 					js.type = 'UpdateExpression';
 				return js;
 				break;
-			case 'BINARY':
+			case 'binary':
 				return translate(syntax.binary)(html);
 				break;
 		}
@@ -47,38 +47,38 @@
 		if (html[0] == undefined) return undefined;
 		var js;
 		switch (html[0].tagName) {
-			case 'EXPRESSION':
+			case 'expression':
 				js = {
 					type: 'ExpressionStatement',
 					expression: expression(html.children())
 				};
 				break;
-			case 'RETURN':
+			case 'return':
 				js = {
 					type: 'ReturnStatement',
 					argument: expression(html.children())
 				};
 				break;
-			case 'VAR':
+			case 'var':
 				js = {
 					type: 'VariableDeclaration',
 					kind: 'var',
 					declarations: html.children().map(function () { return decl($(this)); })
 				};
 				break;
-			case 'BLOCK':
+			case 'block':
 				js = {
 					type: 'BlockStatement',
 					body: html.children().map(function () { return statement($(this)); })
 				};
 				break;
-			case 'IF':
+			case 'if':
 				js = translate(syntax.if)(html);
 				break;
-			case 'WHILE':
+			case 'while':
 				js = translate(syntax.while)(html);
 				break;
-			case 'FOR':
+			case 'for':
 				js = translate(syntax.for)(html);
 				break;
 		}

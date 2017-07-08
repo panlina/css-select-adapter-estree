@@ -1,0 +1,10 @@
+var fs = require('fs');
+var js = fs.readFileSync("js.js", { encoding: 'utf8' });
+var acorn = require("acorn");
+var js = acorn.parseExpressionAt(js);
+var js2html = require("./dist/js2html.js");
+var html = js2html.js2html(js);
+console.log(html.toString());
+var js = js2html.html2js(html);
+var escodegen = require("escodegen");
+console.log(escodegen.generate(js));
