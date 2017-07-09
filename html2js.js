@@ -1,4 +1,7 @@
-﻿function html2js(html) {
+﻿var $ = require('./$.js');
+var syntax = require('./syntax.js').syntax;
+var Syntax = require('./syntax.js').Syntax;
+function html2js(html) {
 	return expression(html);
 	function expression(html) {
 		if (html[0] == undefined) return undefined;
@@ -115,3 +118,4 @@
 		};
 	}
 }
+module.exports = html2js;

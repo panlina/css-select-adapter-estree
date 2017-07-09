@@ -1,3 +1,4 @@
+var $ = require('./$.js');
 var syntax = {};
 syntax.var = {
 	name: 'var',
@@ -67,4 +68,8 @@ Syntax.type = function (jshtml) {
 	function endsWith(s, t) {
 		return s.lastIndexOf(t) + t.length == s.length;
 	}
+};
+module.exports = {
+	syntax: syntax,
+	Syntax: Syntax
 };
