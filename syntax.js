@@ -4,6 +4,14 @@ syntax.var = {
 	name: 'var',
 	type: 'VariableDeclaration'
 };
+syntax.decl = {
+	name: 'decl',
+	type: 'VariableDeclarator',
+	property: {
+		id: 'expression',
+		init: 'expression'
+	}
+};
 syntax.if = {
 	name: 'if',
 	type: 'IfStatement',

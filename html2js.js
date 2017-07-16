@@ -66,8 +66,11 @@ function html2js(html) {
 				js = {
 					type: 'VariableDeclaration',
 					kind: 'var',
-					declarations: html.children().map(function () { return decl($(this)); })
+					declarations: html.children().map(function () { return statement($(this)); })
 				};
+				break;
+			case 'decl':
+				js = translate(syntax.decl)(html);
 				break;
 			case 'block':
 				js = {
@@ -93,13 +96,6 @@ function html2js(html) {
 				body: js
 			};
 		return js;
-	}
-	function decl(html) {
-		return {
-			type: 'VariableDeclarator',
-			id: { type: 'Identifier', name: html.children('name').html() },
-			init: expression(html.children('value').children())
-		};
 	}
 	function translate(syntax) {
 		return function (html) {

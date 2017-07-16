@@ -58,7 +58,10 @@ function js2html(js) {
 				return $("<return>").append(expression(js.argument));
 				break;
 			case "VariableDeclaration":
-				return $("<var>").append(js.declarations.map(decl))
+				return $("<var>").append(js.declarations.map(statement))
+				break;
+			case "VariableDeclarator":
+				return translate(syntax.decl)(js);
 				break;
 			case "BlockStatement":
 				return $("<block>").append(js.body.map(statement));
@@ -73,12 +76,6 @@ function js2html(js) {
 				return translate(syntax.for)(js);
 				break;
 		}
-	}
-	function decl(js) {
-		return $("<decl>").append(
-			$("<name>").text(js.id.name),
-			$("<value>").append(expression(js.init))
-		);
 	}
 	function translate(syntax) {
 		return function (js) {
