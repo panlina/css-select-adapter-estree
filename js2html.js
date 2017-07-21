@@ -5,7 +5,7 @@ function js2html(js) {
 	if (js == undefined) return undefined;
 	switch (js.type) {
 		case 'Literal':
-			return $("<literal>").append(js.raw);
+			return $("<literal>").text(js.raw);
 			break;
 		case 'Identifier':
 			return $("<identifier>").append(js.name);

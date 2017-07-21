@@ -8,7 +8,7 @@ function html2js(html) {
 		case 'literal':
 			js = {
 				type: 'Literal',
-				value: eval(html.html())
+				value: eval(html.text())
 			}
 			break;
 		case 'identifier':
