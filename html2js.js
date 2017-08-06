@@ -42,6 +42,12 @@ function html2js(html) {
 		case 'binary':
 			js = translate(syntax.binary)(html);
 			break;
+		case 'program':
+			js = {
+				type: 'Program',
+				body: html.children().map(function () { return html2js($(this)); })
+			};
+			break;
 		case 'expression':
 			js = {
 				type: 'ExpressionStatement',

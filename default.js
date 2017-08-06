@@ -1,7 +1,7 @@
 var fs = require('fs');
 var js = fs.readFileSync("js.js", { encoding: 'utf8' });
 var acorn = require("acorn");
-var js = acorn.parseExpressionAt(js);
+var js = acorn.parse(js);
 var js2html = require(".");
 var html = js2html.js2html(js);
 console.log(html.toString());
