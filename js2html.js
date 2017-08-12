@@ -68,6 +68,19 @@ function js2html(js) {
 		case "VariableDeclarator":
 			return translate(syntax.decl)(js);
 			break;
+		case 'FunctionDeclaration':
+			return $("<func>").append(
+				$("<id>").append(
+					js2html(js.id)
+				),
+				$("<params>").append(
+					js.params.map(js2html)
+				),
+				$("<body>").append(
+					js2html(js.body)
+				)
+			);
+			break;
 		case "BlockStatement":
 			return $("<block>").append(js.body.map(js2html));
 			break;

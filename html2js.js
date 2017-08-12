@@ -85,6 +85,14 @@ function html2js(html) {
 		case 'decl':
 			js = translate(syntax.decl)(html);
 			break;
+		case 'func':
+			js = {
+				type: 'FunctionDeclaration',
+				id: html2js(html.children('id').children()),
+				params: html.children('params').children().map(function () { return html2js($(this)); }),
+				body: html2js(html.children('body').children())
+			};
+			break;
 		case 'block':
 			js = {
 				type: 'BlockStatement',

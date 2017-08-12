@@ -1,4 +1,4 @@
-(function(x){
+function f(x){
 	var a=x;
 	a++;
 	alert:window.alert(a);
@@ -6,6 +6,7 @@
 		while(true)
 			for(var a=42;!a;)
 				return a;
-})(0);
+};
+f(0);
 var a = [0];
 var a = { a: 0 };
