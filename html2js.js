@@ -14,7 +14,7 @@ function html2js(html) {
 		case 'identifier':
 			js = {
 				type: 'Identifier',
-				name: html.html()
+				name: html.text()
 			};
 			break;
 		case 'call':

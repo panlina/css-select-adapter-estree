@@ -8,7 +8,7 @@ function js2html(js) {
 			return $("<literal>").text(js.raw);
 			break;
 		case 'Identifier':
-			return $("<identifier>").append(js.name);
+			return $("<identifier>").text(js.name);
 			break;
 		case 'CallExpression':
 			return $("<call>").append(
