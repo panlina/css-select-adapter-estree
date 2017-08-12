@@ -66,6 +66,14 @@ syntax.member = {
 		computed: 'bool'
 	}
 };
+syntax.property = {
+	name: 'property',
+	type: 'Property',
+	property: {
+		key: 'expression',
+		value: 'expression'
+	}
+};
 var Syntax = {};
 Syntax.type = function (jshtml) {
 	var type = jshtml instanceof $ ?

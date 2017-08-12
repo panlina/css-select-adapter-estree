@@ -44,6 +44,12 @@ function js2html(js) {
 		case "ArrayExpression":
 			return $("<array>").append(js.elements.map(js2html));
 			break;
+		case "ObjectExpression":
+			return $("<object>").append(js.properties.map(js2html));
+			break;
+		case "Property":
+			return translate(syntax.property)(js);
+			break;
 		case "Program":
 			return $("<program>").append(js.body.map(js2html));
 			break;

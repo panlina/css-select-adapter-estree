@@ -48,6 +48,15 @@ function html2js(html) {
 				elements: html.children().map(function () { return html2js($(this)); })
 			};
 			break;
+		case 'object':
+			js = {
+				type: 'ObjectExpression',
+				properties: html.children().map(function () { return html2js($(this)); })
+			};
+			break;
+		case 'property':
+			js = translate(syntax.property)(html);
+			break;
 		case 'program':
 			js = {
 				type: 'Program',

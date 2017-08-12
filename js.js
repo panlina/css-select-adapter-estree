@@ -8,3 +8,4 @@
 				return a;
 })(0);
 var a = [0];
+var a = { a: 0 };
