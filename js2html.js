@@ -41,6 +41,9 @@ function js2html(js) {
 		case 'AssignmentExpression':
 			return translate(syntax.binary)(js);
 			break;
+		case "ArrayExpression":
+			return $("<array>").append(js.elements.map(js2html));
+			break;
 		case "Program":
 			return $("<program>").append(js.body.map(js2html));
 			break;

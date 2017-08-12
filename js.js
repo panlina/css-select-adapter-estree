@@ -7,3 +7,4 @@
 			for(var a=42;!a;)
 				return a;
 })(0);
+var a = [0];
