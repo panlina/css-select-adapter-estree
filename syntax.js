@@ -1,68 +1,167 @@
-var $ = require('./$.js');
 var syntax = {};
 syntax.var = {
-	name: 'var',
-	type: 'VariableDeclaration'
+	name: 'statement',
+	class: 'var',
+	type: 'VariableDeclaration',
+	property: {
+		declarations: { type: '[]' }
+	}
 };
 syntax.decl = {
 	name: 'decl',
 	type: 'VariableDeclarator',
 	property: {
-		id: 'expression',
-		init: 'expression'
+		id: '{}',
+		init: '{}'
+	}
+};
+syntax.func = {
+	name: 'statement',
+	class: 'func',
+	type: 'FunctionDeclaration',
+	property: {
+		id: '{}',
+		params: { name: 'param', type: '[]' },
+		body: '{}'
 	}
 };
 syntax.if = {
-	name: 'if',
+	name: 'statement',
+	class: 'if',
 	type: 'IfStatement',
 	property: {
-		test: 'expression',
-		consequent: 'statement',
-		alternate: 'statement'
+		test: '{}',
+		consequent: '{}',
+		alternate: '{}'
 	}
 };
 syntax.while = {
-	name: 'while',
+	name: 'statement',
+	class: 'while',
 	type: 'WhileStatement',
 	property: {
-		test: 'expression',
-		body: 'statement'
+		test: '{}',
+		body: '{}'
 	}
 };
 syntax.for = {
-	name: 'for',
+	name: 'statement',
+	class: 'for',
 	type: 'ForStatement',
 	property: {
-		init: null,
-		test: 'expression',
-		update: 'expression',
-		body: 'statement'
+		init: '{}',
+		test: '{}',
+		update: '{}',
+		body: '{}'
+	}
+};
+syntax.return = {
+	name: 'statement',
+	class: 'return',
+	type: 'ReturnStatement',
+	property: {
+		argument: '{}'
+	}
+};
+syntax.expression = {
+	name: 'statement',
+	class: 'expression',
+	type: 'ExpressionStatement',
+	property: {
+		expression: '{}'
+	}
+};
+syntax.empty = {
+	name: 'statement',
+	class: 'empty',
+	type: 'EmptyStatement'
+};
+syntax.block = {
+	name: 'statement',
+	class: 'block',
+	type: 'BlockStatement',
+	property: {
+		body: { type: '[]' }
+	}
+};
+syntax.program = {
+	name: 'program',
+	type: 'Program',
+	property: {
+		body: { type: '[]' }
+	}
+};
+syntax.literal = {
+	name: 'expression',
+	class: 'literal',
+	type: 'Literal'
+};
+syntax.identifier = {
+	name: 'expression',
+	class: 'identifier',
+	type: 'Identifier'
+};
+syntax.object = {
+	name: 'expression',
+	class: 'object',
+	type: 'ObjectExpression',
+	property: {
+		properties: { type: '[]' }
+	}
+};
+syntax.array = {
+	name: 'expression',
+	class: 'array',
+	type: 'ArrayExpression',
+	property: {
+		elements: { type: '[]' }
+	}
+};
+syntax.call = {
+	name: 'expression',
+	class: 'call',
+	type: 'CallExpression',
+	property: {
+		callee: '{}',
+		arguments: { name: 'argument', type: '[]' }
+	}
+};
+syntax.function = {
+	name: 'expression',
+	class: 'function',
+	type: 'FunctionExpression',
+	property: {
+		body: '{}',
+		params: { name: 'param', type: '[]' }
 	}
 };
 syntax.unary = {
-	name: 'unary',
+	name: 'expression',
+	class: 'unary',
 	type: 'UnaryExpression',
 	property: {
-		argument: 'expression',
+		argument: '{}',
 		operator: 'string',
 		prefix: 'bool'
 	}
 };
 syntax.binary = {
-	name: 'binary',
+	name: 'expression',
+	class: 'binary',
 	type: 'BinaryExpression',
 	property: {
-		left: 'expression',
-		right: 'expression',
+		left: '{}',
+		right: '{}',
 		operator: 'string'
 	}
 };
 syntax.member = {
-	name: 'member',
+	name: 'expression',
+	class: 'member',
 	type: 'MemberExpression',
 	property: {
-		object: 'expression',
-		property: 'expression',
+		object: '{}',
+		property: '{}',
 		computed: 'bool'
 	}
 };
@@ -70,22 +169,12 @@ syntax.property = {
 	name: 'property',
 	type: 'Property',
 	property: {
-		key: 'expression',
-		value: 'expression'
+		key: '{}',
+		value: '{}'
 	}
 };
-var Syntax = {};
-Syntax.type = function (jshtml) {
-	var type = jshtml instanceof $ ?
-		syntax[jshtml[0].tagName.toLowerCase()].type :
-		jshtml.type;
-	return endsWith(type, "Declaration") || endsWith(type, "Statement") ?
-		'statement' : 'expression';
-	function endsWith(s, t) {
-		return s.lastIndexOf(t) + t.length == s.length;
-	}
-};
-module.exports = {
-	syntax: syntax,
-	Syntax: Syntax
-};
+for (var name in syntax)
+	syntax[syntax[name].type] = syntax[name];
+syntax.UpdateExpression = syntax.unary;
+syntax.AssignmentExpression = syntax.binary;
+module.exports = syntax;

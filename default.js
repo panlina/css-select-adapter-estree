@@ -2,9 +2,10 @@ var fs = require('fs');
 var js = fs.readFileSync("js.js", { encoding: 'utf8' });
 var acorn = require("acorn");
 var js = acorn.parse(js);
-var js2html = require(".");
-var html = js2html.js2html(js);
-console.log(html.toString());
-var js = js2html.html2js(html);
+var adapter = require('.').adapter;
+var Node = require('.').Node;
+var select = require('css-select');
+var element = select(":root>.var>decl", new Node(js), { adapter: adapter });
 var escodegen = require("escodegen");
-console.log(escodegen.generate(js));
+for (var i in element)
+	console.log(escodegen.generate(element[i].value));

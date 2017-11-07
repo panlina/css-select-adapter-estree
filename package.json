@@ -1,12 +1,13 @@
 {
-  "name": "js2html",
+  "name": "css-select-adapter-estree",
   "version": "0.0.0",
-  "homepage": "https://github.com/panlina/js2html",
+  "homepage": "https://github.com/panlina/css-select-adapter-estree",
   "author": "Jack Lu <jacklu@jacklu.me>",
-  "dependencies": {
-    "cheerio": "*"
+  "peerDependencies": {
+    "css-select": "~1.3.0-rc0"
   },
   "devDependencies": {
+    "css-select": "~1.3.0-rc0",
     "acorn": "^5.0.3",
     "escodegen": "^1.8.1"
   }
