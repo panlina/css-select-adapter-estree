@@ -38,6 +38,21 @@ Node.prototype.getChildren = function () {
 Node.prototype.getParent = function () {
 	return this.parent;
 };
+Node.prototype.hasAttribute = function (name) {
+	if (name == 'id') return 'property' in this;
+	if (name == 'label') return 'label' in this;
+	var s = syntax[this.value.type];
+	if (name == 'class') return 'class' in s;
+	var p; if (s.property) p = s.property[name];
+	switch (p) {
+		case 'bool':
+			return this.value[name];
+		case 'string':
+			return true;
+		default:
+			return false;
+	}
+};
 Node.prototype.getAttribute = function (name) {
 	if (name == 'id') return this.property;
 	if (name == 'label') return this.label;

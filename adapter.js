@@ -3,7 +3,7 @@ module.exports = {
 	getName: function (element) { return element.getName(); },
 	getChildren: function (node) { return node.getChildren(); },
 	getParent: function (node) { return node.getParent(); },
-	hasAttrib: function (element, name) { return element.getAttribute(name); },
+	hasAttrib: function (element, name) { return element.hasAttribute(name); },
 	getAttributeValue: function (element, name) { return element.getAttribute(name); },
 	findAll: function (test, nodes) {
 		var $this = this;
