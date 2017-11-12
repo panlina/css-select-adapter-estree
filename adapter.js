@@ -2,6 +2,7 @@ module.exports = {
 	isTag: function (node) { return node.isTag(); },
 	getName: function (element) { return element.getName(); },
 	getChildren: function (node) { return node.getChildren(); },
+	getSiblings: function (node) { return node.getSiblings(); },
 	getParent: function (node) { return node.getParent(); },
 	hasAttrib: function (element, name) { return element.hasAttribute(name); },
 	getAttributeValue: function (element, name) { return element.getAttribute(name); },

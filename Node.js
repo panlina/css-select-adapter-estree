@@ -12,6 +12,7 @@ Node.prototype.getName = function () {
 	return syntax[this.value.type].name;
 };
 Node.prototype.getChildren = function () {
+	if (this.children) return this.children;
 	var property = syntax[this.value.type].property || {};
 	var children = [];
 	for (var name in property) {
@@ -33,7 +34,11 @@ Node.prototype.getChildren = function () {
 			return node;
 		}
 	}
+	this.children = children;
 	return children;
+};
+Node.prototype.getSiblings = function () {
+	return this.parent.getChildren();
 };
 Node.prototype.getParent = function () {
 	return this.parent;
