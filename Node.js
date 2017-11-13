@@ -9,11 +9,11 @@ function Node(value) {
 }
 Node.prototype.isTag = function () { return true; };
 Node.prototype.getName = function () {
-	return syntax[this.value.type].name;
+	return this.syntax.name;
 };
 Node.prototype.getChildren = function () {
 	if (this.children) return this.children;
-	var property = syntax[this.value.type].property || {};
+	var property = this.syntax.property || {};
 	var children = [];
 	for (var name in property) {
 		var value = this.value[name];
@@ -46,9 +46,8 @@ Node.prototype.getParent = function () {
 Node.prototype.hasAttribute = function (name) {
 	if (name == 'id') return 'property' in this;
 	if (name == 'label') return 'label' in this;
-	var s = syntax[this.value.type];
-	if (name == 'class') return 'class' in s;
-	var p; if (s.property) p = s.property[name];
+	if (name == 'class') return 'class' in this.syntax;
+	var p; if (this.syntax.property) p = this.syntax.property[name];
 	switch (p) {
 		case 'bool':
 			return this.value[name];
@@ -61,8 +60,13 @@ Node.prototype.hasAttribute = function (name) {
 Node.prototype.getAttribute = function (name) {
 	if (name == 'id') return this.property;
 	if (name == 'label') return this.label;
-	if (name == 'class') return syntax[this.value.type].class;
+	if (name == 'class') return this.syntax.class;
 	return this.value[name];
 };
+Object.defineProperty(Node.prototype, 'syntax', {
+	get: function () {
+		return syntax[this.value.type];
+	}
+});
 
 module.exports = Node;
