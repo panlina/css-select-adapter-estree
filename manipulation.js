@@ -54,11 +54,11 @@ function remove() {
 	var parent = this.parent;
 	for (var name in parent.syntax.property) {
 		var p = parent.syntax.property[name];
+		if (typeof (p) == 'string')
+			p = { name: name, type: p };
 		if (p.name == this.property)
 			break;
 	}
-	if (typeof (p) == 'string')
-		p = { name: name, type: p };
 	if (p.type == '[]') {
 		var i = parent.value[name].indexOf(this.value);
 		parent.value[name].splice(i, 1);
@@ -71,11 +71,11 @@ function replace(syntax) {
 	var parent = this.parent;
 	for (var name in parent.syntax.property) {
 		var p = parent.syntax.property[name];
+		if (typeof (p) == 'string')
+			p = { name: name, type: p };
 		if (p.name == this.property)
 			break;
 	}
-	if (typeof (p) == 'string')
-		p = { name: name, type: p };
 	if (p.type == '[]') {
 		var i = parent.value[name].indexOf(this.value);
 		parent.value[name][i] = syntax;
