@@ -6,6 +6,7 @@ module.exports = {
 	getParent: function (node) { return node.getParent(); },
 	hasAttrib: function (element, name) { return element.hasAttribute(name); },
 	getAttributeValue: function (element, name) { return element.getAttribute(name); },
+	existsOne: function (test, elems) { return elems.some(test); },
 	findAll: function (test, nodes) {
 		var $this = this;
 		var all = [];
