@@ -126,6 +126,15 @@ syntax.call = {
 		arguments: { name: 'argument', type: '[]' }
 	}
 };
+syntax.new = {
+	name: 'expression',
+	class: 'new',
+	type: 'NewExpression',
+	property: {
+		callee: '{}',
+		arguments: { name: 'argument', type: '[]' }
+	}
+};
 syntax.function = {
 	name: 'expression',
 	class: 'function',
@@ -155,6 +164,16 @@ syntax.binary = {
 		operator: 'string'
 	}
 };
+syntax.conditional = {
+	name: 'expression',
+	class: 'conditional',
+	type: 'ConditionalExpression',
+	property: {
+		test: '{}',
+		consequent: '{}',
+		alternate: '{}'
+	}
+};
 syntax.member = {
 	name: 'expression',
 	class: 'member',
@@ -173,8 +192,14 @@ syntax.property = {
 		value: '{}'
 	}
 };
+syntax.this = {
+	name: 'expression',
+	class: 'this',
+	type: 'ThisExpression'
+};
 for (var name in syntax)
 	syntax[syntax[name].type] = syntax[name];
 syntax.UpdateExpression = syntax.unary;
 syntax.AssignmentExpression = syntax.binary;
+syntax.LogicalExpression = syntax.binary;
 module.exports = syntax;
