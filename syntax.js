@@ -55,12 +55,90 @@ syntax.for = {
 		body: '{}'
 	}
 };
+syntax.forin = {
+	name: 'statement',
+	class: 'forin',
+	type: 'ForInStatement',
+	property: {
+		left: '{}',
+		right: '{}',
+		body: '{}'
+	}
+};
+syntax.switch = {
+	name: 'statement',
+	class: 'switch',
+	type: 'SwitchStatement',
+	property: {
+		discriminant: '{}',
+		cases: { name: 'argument', type: '[]' }
+	}
+};
+syntax.case = {
+	name: 'case',
+	type: 'SwitchCase',
+	property: {
+		test: '{}',
+		consequent: { name: 'consequent', type: '[]' }
+	}
+};
+syntax.break = {
+	name: 'statement',
+	class: 'break',
+	type: 'BreakStatement',
+	property: {
+		label: '{}'
+	}
+};
+syntax.continue = {
+	name: 'statement',
+	class: 'continue',
+	type: 'ContinueStatement',
+	property: {
+		label: '{}'
+	}
+};
+syntax.with = {
+	name: 'statement',
+	class: 'with',
+	type: 'WithStatement',
+	property: {
+		object: '{}',
+		body: '{}'
+	}
+};
 syntax.return = {
 	name: 'statement',
 	class: 'return',
 	type: 'ReturnStatement',
 	property: {
 		argument: '{}'
+	}
+};
+syntax.throw = {
+	name: 'statement',
+	class: 'throw',
+	type: 'ThrowStatement',
+	property: {
+		argument: '{}'
+	}
+};
+syntax.try = {
+	name: 'statement',
+	class: 'try',
+	type: 'TryStatement',
+	property: {
+		block: '{}',
+		handler: '{}',
+		finalizer: '{}'
+	}
+};
+syntax.catch = {
+	name: 'catch',
+	type: 'CatchClause',
+	property: {
+		param: '{}',
+		body: '{}'
 	}
 };
 syntax.expression = {
